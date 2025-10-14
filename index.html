@@ -1373,80 +1373,72 @@
         ];
 
         // Email Templates
-        let emailTemplates = [
-            {
-                name: "Template 1 – Asking About Job Openings",
-                content: `Hi [HR's Name],
+       let emailTemplates = [
+    {
+        name: "Template 1 – Asking About Job Openings",
+        content: `Hi [HR’s Name],
 
-I hope you are doing well. My name is Chetan Vani, and I am a Junior DevOps Engineer with skills in AWS, Docker, Kubernetes, CI/CD, and Linux. I am very interested in opportunities at [Company Name], and I wanted to check if there are any current or upcoming openings for a DevOps Engineer role in your organization.
+I hope you are doing well. My name is [Your Name], and I am a [Your Job Role] with experience in [Your Key Skills]. I am very interested in opportunities at [Company Name], and I wanted to inquire if there are any current or upcoming openings for a [Job Role] role in your organization.
 
-I would be grateful if you could share any information. Thank you for your time, and I look forward to hearing from you.
+I would greatly appreciate any information you could share. Thank you for your time, and I look forward to hearing from you.
 
-Best regards,
-Chetan Vani
-📧 chetanvani78@gmail.com
-📱 +91 8827814481
-🔗 GitHub | LinkedIn | Portfolio`
-            },
-            {
-                name: "Template 2 – Company Already Hiring for DevOps",
-                content: `Hi [HR's Name],
+Best regards,  
+[Your Name]`
+    },
+    {
+        name: "Template 2 – When Company is Hiring for DevOps",
+        content: `Hi [HR’s Name],
 
-I hope you are doing well. My name is Chetan Vani, and I recently applied for the DevOps Engineer role at [Company Name]. With my knowledge of AWS, Docker, Kubernetes, Terraform, Jenkins, and CI/CD pipelines, I believe I am a strong fit for this position.
+I hope you are doing well. My name is [Your Name], and I recently applied for the [Job Role] role at [Company Name]. With my experience in [Key Skills], I believe I am a strong fit for this position.
 
-I am very excited about the opportunity to contribute to [Company Name] and would be glad if you could take a look at my profile and attached resume. Please let me know if you need any further details from my side.
+I am very excited about the opportunity to contribute to [Company Name], and I would be happy if you could take a look at my profile and attached resume. Please let me know if you need any further information.
 
 Thank you for your time and consideration.
 
-Best regards,
-Chetan Vani
-📧 chetanvani78@gmail.com
-📱 +91 8827814481
-🔗 GitHub | LinkedIn | Portfolio`
-            },
-            {
-                name: "Template 3 – Asking Employee for Referral",
-                content: `Hi [Employee's Name],
+Best regards,  
+[Your Name]`
+    },
+    {
+        name: "Template 3 – Asking Employee for Referral",
+        content: `Hi [Employee’s Name],
 
-I hope you are doing well. My name is Chetan Vani, and I am a Junior DevOps Engineer with skills in AWS, Docker, Kubernetes, CI/CD, and Linux. I noticed that [Company Name] is hiring for a DevOps Engineer role, and I believe my background makes me a strong fit for this position.
+I hope you are doing well. My name is [Your Name], and I am a [Your Job Role] with experience in [Your Key Skills]. I noticed that [Company Name] is currently hiring for a [Job Role] role, and I feel that my background makes me a strong fit for this position.
 
-Since you are part of the team at [Company Name], I wanted to kindly ask if you would be open to referring me for this role. I would be truly grateful for your support, and I've attached my resume for your reference.
+Since you're part of the team at [Company Name], I wanted to kindly ask if you’d be open to referring me for this role. I would be truly grateful for your support, and I’ve attached my resume for your reference.
 
-Thank you for your time, and I completely understand if you are unable to help at the moment.
+Thank you for your time, and I completely understand if you're unable to assist at the moment.
 
-Best regards,
-Chetan Vani
-📧 chetanvani78@gmail.com
-📱 +91 8827814481
-🔗 GitHub | LinkedIn | Portfolio`
-            },
-            {
-                name: "Template 4 – Cold Email to HR (Resume Submission)",
-                content: `Subject: Application for Junior DevOps Engineer Role – Chetan Vani
+Best regards,  
+[Your Name]`
+    },
+    {
+        name: "Template 4 – Cold Email to HR (Resume Submission)",
+        content: `Subject: Application for [Job Role] Role – [Your Name]
 
-Dear [HR's Name],
+Dear [HR’s Name],
 
-I hope this email finds you well. My name is Chetan Vani, and I am writing to express my interest in the DevOps Engineer role at [Company Name].
+I hope this email finds you well. My name is [Your Name], and I am writing to express my interest in the [Job Role] position at [Company Name].
 
-I have hands-on experience in AWS, Docker, Kubernetes, Terraform, Jenkins, and CI/CD pipelines through internships and projects. During my recent internships at Elevate Labs and Hisan Labs, I:
+I have hands-on experience in [Key Skills] through [mention any relevant experience or internships]. During my previous roles, I:
 
-• Automated CI/CD pipelines, reducing deployment time from 3 hours to under 20 minutes.
-• Designed AWS infrastructure with Terraform, improving scalability and availability.
-• Deployed Kubernetes workloads with optimized resource allocation, cutting costs by 20%.
+• [Example 1 of Achievements or Skills]  
+• [Example 2 of Achievements or Skills]  
+• [Example 3 of Achievements or Skills]
 
-I believe my skills in cloud infrastructure, automation, and system reliability make me a strong fit for this role. I have attached my resume for your review and would be grateful if you could consider my application.
+I believe my background makes me a strong candidate for this role. I’ve attached my resume for your review, and I would be grateful if you could consider my application.
 
 Thank you for your time and consideration. I look forward to the possibility of contributing to [Company Name].
 
-Best regards,
-Chetan Vani
-📧 chetanvani78@gmail.com
-📱 +91 8827814481
-🔗 GitHub | LinkedIn | Portfolio
+Best regards,  
+[Your Name]  
+[Your Email Address]  
+[Your Phone Number]  
+[LinkedIn | GitHub | Portfolio (Optional)]
 
-Attachment: Resume – Chetan Vani.pdf`
-            }
-        ];
+Attachment: Resume – [Your Name].pdf`
+    }
+];
+
 
         let visitedCompanies = JSON.parse(localStorage.getItem('visitedCompanies') || '{}');
         let customTemplates = JSON.parse(localStorage.getItem('customTemplates') || '[]');
