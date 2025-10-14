@@ -40,6 +40,12 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .logo-icon {
@@ -91,6 +97,16 @@
             background: #764ba2;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #333;
         }
 
         /* Landing Page */
@@ -238,12 +254,12 @@
         }
 
         /* Listings Page */
-        #listingsPage {
+        #listingsPage, #templatesPage {
             display: none;
             padding: 20px;
         }
 
-        .listings-container {
+        .listings-container, .templates-container {
             max-width: 1400px;
             margin: 0 auto;
             background: white;
@@ -252,17 +268,39 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
-        .listings-header {
+        .listings-header, .templates-header {
             text-align: center;
             margin-bottom: 30px;
             padding-bottom: 20px;
             border-bottom: 3px solid #667eea;
+            position: relative;
         }
 
-        .listings-header h1 {
+        .listings-header h1, .templates-header h1 {
             color: #667eea;
             font-size: 2.5em;
             margin-bottom: 10px;
+        }
+
+        .add-template-btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: #667eea;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 2em;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .add-template-btn:hover {
+            background: #764ba2;
+            transform: rotate(90deg);
         }
 
         .stats {
@@ -310,16 +348,17 @@
             font-weight: 500;
         }
 
-        input[type="text"], select {
+        input[type="text"], select, textarea {
             width: 100%;
             padding: 10px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             font-size: 1em;
             transition: border-color 0.3s;
+            font-family: inherit;
         }
 
-        input[type="text"]:focus, select:focus {
+        input[type="text"]:focus, select:focus, textarea:focus {
             outline: none;
             border-color: #667eea;
         }
@@ -456,14 +495,121 @@
             text-align: center;
         }
 
-        /* Mobile Menu */
-        .mobile-menu-btn {
+        /* Templates Section */
+        .templates-grid {
+            display: grid;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .template-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 25px;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        .template-card:hover {
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        .template-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .template-content {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            line-height: 1.8;
+            color: #333;
+            font-size: 0.95em;
+        }
+
+        .copy-btn {
+            margin-top: 15px;
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #45a049;
+        }
+
+        /* Modal */
+        .modal {
             display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 50px auto;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-header h2 {
+            color: #667eea;
+            font-size: 1.8em;
+        }
+
+        .close-modal {
             background: none;
             border: none;
-            font-size: 1.5em;
+            font-size: 2em;
             cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
             color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        textarea {
+            min-height: 200px;
+            resize: vertical;
         }
 
         @media (max-width: 768px) {
@@ -502,6 +648,11 @@
             .filters {
                 flex-direction: column;
             }
+
+            .add-template-btn {
+                position: relative;
+                margin: 20px auto;
+            }
         }
     </style>
 </head>
@@ -509,7 +660,7 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">
+            <div class="logo" onclick="showPage('landing')">
                 <div class="logo-icon">🏢</div>
                 <div class="logo-text">
                     <h1>Indore IT Hub</h1>
@@ -520,6 +671,7 @@
             <ul class="nav-menu" id="navMenu">
                 <li><a onclick="showPage('landing')">Home</a></li>
                 <li><a onclick="showPage('listings')">Browse Companies</a></li>
+                <li><a onclick="showPage('templates')">Templates</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><button class="nav-btn" onclick="showPage('listings')">View All Listings</button></li>
@@ -532,11 +684,11 @@
         <section class="hero-section">
             <div class="hero-content">
                 <h1>🚀 Discover Indore's Best IT Companies</h1>
-                <p>Your comprehensive directory of 59+ verified IT and software companies in Indore</p>
+                <p>Your comprehensive directory of 50+ verified IT and software companies in Indore</p>
                 
                 <div class="hero-stats">
                     <div class="hero-stat-card">
-                        <div class="hero-stat-number">59+</div>
+                        <div class="hero-stat-number">50+</div>
                         <div class="hero-stat-label">IT Companies</div>
                     </div>
                     <div class="hero-stat-card">
@@ -594,9 +746,9 @@
                         <p>Get instant access to websites, phone numbers, and email addresses of all companies.</p>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon">📥</div>
-                        <h3>Export Data</h3>
-                        <p>Export your shortlisted companies for offline reference and team collaboration.</p>
+                        <div class="feature-icon">📧</div>
+                        <h3>Email Templates</h3>
+                        <p>Ready-to-use professional email templates for reaching out to HR and employees.</p>
                     </div>
                 </div>
             </div>
@@ -613,7 +765,7 @@
 
             <div class="stats">
                 <div class="stat-card">
-                    <div class="stat-number" id="totalCompanies">59</div>
+                    <div class="stat-number" id="totalCompanies">50</div>
                     <div class="stat-label">Total Companies</div>
                 </div>
                 <div class="stat-card">
@@ -625,7 +777,7 @@
                     <div class="stat-label">Average Rating</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" id="filteredCount">59</div>
+                    <div class="stat-number" id="filteredCount">50</div>
                     <div class="stat-label">Showing</div>
                 </div>
             </div>
@@ -669,94 +821,43 @@
         </div>
     </div>
 
+    <!-- Templates Page -->
+    <div id="templatesPage">
+        <div class="templates-container">
+            <div class="templates-header">
+                <h1>📧 Email Templates for HR Outreach</h1>
+                <p class="subtitle">Professional templates to reach out to companies and HR managers</p>
+                <button class="add-template-btn" onclick="openAddTemplateModal()" title="Add New Template">+</button>
+            </div>
+
+            <div class="templates-grid" id="templatesGrid"></div>
+        </div>
+    </div>
+
+    <!-- Add Template Modal -->
+    <div id="addTemplateModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>➕ Add New Template</h2>
+                <button class="close-modal" onclick="closeAddTemplateModal()">&times;</button>
+            </div>
+            <form id="addTemplateForm" onsubmit="addNewTemplate(event)">
+                <div class="form-group">
+                    <label for="templateName">Template Name *</label>
+                    <input type="text" id="templateName" required placeholder="e.g., Follow-up After Interview">
+                </div>
+                <div class="form-group">
+                    <label for="templateContent">Template Content *</label>
+                    <textarea id="templateContent" required placeholder="Enter your email template here..."></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Add Template</button>
+            </form>
+        </div>
+    </div>
+
     <script>
+        // Verified companies - removed domain-only listings like qualimatrix.com
         const companies = [
-            {
-                name: "Ubikon Technologies Pvt Ltd",
-                rating: 5.0,
-                reviews: 564,
-                address: "2nd Floor, Swaraj Enterprises, above Table World, Vijay Nagar, Indore",
-                phone: "+91 6264818989",
-                email: "contact@ubikon.in",
-                website: "https://ubikon.in",
-                hours: "Open 24 hours",
-                services: "Website Design & Mobile App Development"
-            },
-            {
-                name: "Alphawizz Technologies Pvt. Ltd.",
-                rating: 4.6,
-                reviews: 778,
-                address: "Plot Number 152, Ratanlok Colony, Scheme No 53, near Cars 24 showroom, Indore",
-                phone: "+91 8815399989",
-                email: "info@alphawizz.com",
-                website: "https://alphawizz.com",
-                hours: "Opens 10 AM",
-                services: "Software Development"
-            },
-            {
-                name: "Savo Technologies Private Limited",
-                rating: 4.7,
-                reviews: 58,
-                address: "139, PU4, Behind C21 Mall, Vijay Nagar, Scheme 54, Indore",
-                phone: "+91 7502901234",
-                email: "contact@savoglobal.com",
-                website: "https://savoglobal.com",
-                hours: "Open 24 hours",
-                services: "Enterprise Solutions"
-            },
-            {
-                name: "Black Grapes Softech",
-                rating: 4.3,
-                reviews: 52,
-                address: "252-F/H Scheme No 54, Vijaynagar, Indore",
-                phone: "+91 7470997884",
-                email: "info@blackgrapessoftech.com",
-                website: "https://blackgrapessoftech.com",
-                hours: "Closes 4:09 AM",
-                services: "Web & Mobile Development"
-            },
-            {
-                name: "TECHRENA TECHNOLOGIES",
-                rating: 4.7,
-                reviews: 75,
-                address: "OFFICE 408, 4TH FLOOR APOLLO PREMIER, Vijay Nagar Square, Indore",
-                phone: "+91 8982650208",
-                website: "https://www.techrenatech.com",
-                hours: "Opens 10 AM",
-                services: "IT Solutions"
-            },
-            {
-                name: "i-SOFTZONE - Software Development Company",
-                rating: 4.1,
-                reviews: 91,
-                address: "Shagun Arcade, Vijay Nagar Square, 215, AB Rd, near Medanta Hospital, Indore",
-                phone: "+91 7415664456",
-                website: "https://isoftzone.com",
-                hours: "Opens 10 AM",
-                services: "Software Development",
-                review: "Team is very professional and meet delivery before time"
-            },
-            {
-                name: "Samyotech Software Solutions Pvt. Ltd.",
-                rating: 4.6,
-                reviews: 66,
-                address: "1st Floor Pramukh Plaza, near Sajan Prabha Garden, Indore",
-                phone: "+91 7869999639",
-                website: "https://samyotech.com",
-                hours: "Opens 10 AM",
-                services: "Software Solutions"
-            },
-            {
-                name: "BridgeFix Technology Private Limited",
-                rating: 4.8,
-                reviews: 50,
-                address: "389-390, Indore",
-                phone: "+91 9425960946",
-                website: "https://bridgefix.com",
-                hours: "Opens 9:30 AM",
-                services: "Software Development",
-                review: "Supportive staff to learn new things and very healthy environment"
-            },
             {
                 name: "Golden Eagle IT Technologies",
                 rating: 4.1,
@@ -790,16 +891,6 @@
                 review: "Reliable and trustworthy company that delivers on promises"
             },
             {
-                name: "Nagar Software Solution Pvt Ltd",
-                rating: 4.8,
-                reviews: 17,
-                address: "308, Shagun Arcade, Indore",
-                phone: "+91 7772999694",
-                website: "https://nagarsoftware.com",
-                hours: "Opens 10:30 AM",
-                services: "Software Solutions"
-            },
-            {
                 name: "InTouch Software Solution",
                 rating: 4.9,
                 reviews: 28,
@@ -809,16 +900,6 @@
                 hours: "Opens 8:30 AM",
                 services: "Website & Social Media Management",
                 review: "They handled our website and social media professionally"
-            },
-            {
-                name: "Qualimatrix Technologies Pvt Ltd",
-                rating: 4.9,
-                reviews: 31,
-                address: "Cliffton Corporate, 505-506, Indore",
-                phone: "+91 8103353297",
-                website: "https://qualimatrix.com",
-                hours: "Opens 9 AM",
-                services: "Software Solutions"
             },
             {
                 name: "Logical Soft Tech Private Limited",
@@ -1291,17 +1372,102 @@
             }
         ];
 
+        // Email Templates
+        let emailTemplates = [
+            {
+                name: "Template 1 – Asking About Job Openings",
+                content: `Hi [HR's Name],
+
+I hope you are doing well. My name is Chetan Vani, and I am a Junior DevOps Engineer with skills in AWS, Docker, Kubernetes, CI/CD, and Linux. I am very interested in opportunities at [Company Name], and I wanted to check if there are any current or upcoming openings for a DevOps Engineer role in your organization.
+
+I would be grateful if you could share any information. Thank you for your time, and I look forward to hearing from you.
+
+Best regards,
+Chetan Vani
+📧 chetanvani78@gmail.com
+📱 +91 8827814481
+🔗 GitHub | LinkedIn | Portfolio`
+            },
+            {
+                name: "Template 2 – Company Already Hiring for DevOps",
+                content: `Hi [HR's Name],
+
+I hope you are doing well. My name is Chetan Vani, and I recently applied for the DevOps Engineer role at [Company Name]. With my knowledge of AWS, Docker, Kubernetes, Terraform, Jenkins, and CI/CD pipelines, I believe I am a strong fit for this position.
+
+I am very excited about the opportunity to contribute to [Company Name] and would be glad if you could take a look at my profile and attached resume. Please let me know if you need any further details from my side.
+
+Thank you for your time and consideration.
+
+Best regards,
+Chetan Vani
+📧 chetanvani78@gmail.com
+📱 +91 8827814481
+🔗 GitHub | LinkedIn | Portfolio`
+            },
+            {
+                name: "Template 3 – Asking Employee for Referral",
+                content: `Hi [Employee's Name],
+
+I hope you are doing well. My name is Chetan Vani, and I am a Junior DevOps Engineer with skills in AWS, Docker, Kubernetes, CI/CD, and Linux. I noticed that [Company Name] is hiring for a DevOps Engineer role, and I believe my background makes me a strong fit for this position.
+
+Since you are part of the team at [Company Name], I wanted to kindly ask if you would be open to referring me for this role. I would be truly grateful for your support, and I've attached my resume for your reference.
+
+Thank you for your time, and I completely understand if you are unable to help at the moment.
+
+Best regards,
+Chetan Vani
+📧 chetanvani78@gmail.com
+📱 +91 8827814481
+🔗 GitHub | LinkedIn | Portfolio`
+            },
+            {
+                name: "Template 4 – Cold Email to HR (Resume Submission)",
+                content: `Subject: Application for Junior DevOps Engineer Role – Chetan Vani
+
+Dear [HR's Name],
+
+I hope this email finds you well. My name is Chetan Vani, and I am writing to express my interest in the DevOps Engineer role at [Company Name].
+
+I have hands-on experience in AWS, Docker, Kubernetes, Terraform, Jenkins, and CI/CD pipelines through internships and projects. During my recent internships at Elevate Labs and Hisan Labs, I:
+
+• Automated CI/CD pipelines, reducing deployment time from 3 hours to under 20 minutes.
+• Designed AWS infrastructure with Terraform, improving scalability and availability.
+• Deployed Kubernetes workloads with optimized resource allocation, cutting costs by 20%.
+
+I believe my skills in cloud infrastructure, automation, and system reliability make me a strong fit for this role. I have attached my resume for your review and would be grateful if you could consider my application.
+
+Thank you for your time and consideration. I look forward to the possibility of contributing to [Company Name].
+
+Best regards,
+Chetan Vani
+📧 chetanvani78@gmail.com
+📱 +91 8827814481
+🔗 GitHub | LinkedIn | Portfolio
+
+Attachment: Resume – Chetan Vani.pdf`
+            }
+        ];
+
         let visitedCompanies = JSON.parse(localStorage.getItem('visitedCompanies') || '{}');
+        let customTemplates = JSON.parse(localStorage.getItem('customTemplates') || '[]');
 
         function showPage(page) {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.remove('active');
+            
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('listingsPage').style.display = 'none';
+            document.getElementById('templatesPage').style.display = 'none';
+            
             if (page === 'landing') {
                 document.getElementById('landingPage').style.display = 'block';
-                document.getElementById('listingsPage').style.display = 'none';
             } else if (page === 'listings') {
-                document.getElementById('landingPage').style.display = 'none';
                 document.getElementById('listingsPage').style.display = 'block';
                 renderCompanies();
                 updateStats();
+            } else if (page === 'templates') {
+                document.getElementById('templatesPage').style.display = 'block';
+                renderTemplates();
             }
         }
 
@@ -1419,12 +1585,156 @@
             a.click();
         }
 
+        // Templates Functions
+        function renderTemplates() {
+            const grid = document.getElementById('templatesGrid');
+            const allTemplates = [...emailTemplates, ...customTemplates];
+            
+            grid.innerHTML = allTemplates.map((template, index) => `
+                <div class="template-card">
+                    <div class="template-title">${template.name}</div>
+                    <div class="template-content" id="template-${index}">${template.content}</div>
+                    <button class="copy-btn" onclick="copyTemplate(${index})">📋 Copy Template</button>
+                </div>
+            `).join('');
+        }
+
+        function copyTemplate(index) {
+            const allTemplates = [...emailTemplates, ...customTemplates];
+            const template = allTemplates[index];
+            
+            navigator.clipboard.writeText(template.content).then(() => {
+                alert('✅ Template copied to clipboard!');
+            }).catch(err => {
+                alert('Failed to copy template. Please try again.');
+            });
+        }
+
+        function openAddTemplateModal() {
+            document.getElementById('addTemplateModal').style.display = 'block';
+        }
+
+        function closeAddTemplateModal() {
+            document.getElementById('addTemplateModal').style.display = 'none';
+            document.getElementById('addTemplateForm').reset();
+        }
+
+        function addNewTemplate(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('templateName').value;
+            const content = document.getElementById('templateContent').value;
+            
+            const newTemplate = { name, content };
+            customTemplates.push(newTemplate);
+            localStorage.setItem('customTemplates', JSON.stringify(customTemplates));
+            
+            closeAddTemplateModal();
+            renderTemplates();
+            alert('✅ Template added successfully!');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('addTemplateModal');
+            if (event.target == modal) {
+                closeAddTemplateModal();
+            }
+        }
+
+        // Event Listeners
         document.getElementById('searchInput').addEventListener('input', filterCompanies);
         document.getElementById('ratingFilter').addEventListener('change', filterCompanies);
         document.getElementById('visitedFilter').addEventListener('change', filterCompanies);
 
-        // Initialize on page load
+        // Initialize
         updateStats();
     </script>
 </body>
-</html>
+<!-- </html>: "Ubikon Technologies Pvt Ltd",
+                rating: 5.0,
+                reviews: 564,
+                address: "2nd Floor, Swaraj Enterprises, above Table World, Vijay Nagar, Indore",
+                phone: "+91 6264818989",
+                email: "contact@ubikon.in",
+                website: "https://ubikon.in",
+                hours: "Open 24 hours",
+                services: "Website Design & Mobile App Development"
+            },
+            {
+                name: "Alphawizz Technologies Pvt. Ltd.",
+                rating: 4.6,
+                reviews: 778,
+                address: "Plot Number 152, Ratanlok Colony, Scheme No 53, near Cars 24 showroom, Indore",
+                phone: "+91 8815399989",
+                email: "info@alphawizz.com",
+                website: "https://alphawizz.com",
+                hours: "Opens 10 AM",
+                services: "Software Development"
+            },
+            {
+                name: "Savo Technologies Private Limited",
+                rating: 4.7,
+                reviews: 58,
+                address: "139, PU4, Behind C21 Mall, Vijay Nagar, Scheme 54, Indore",
+                phone: "+91 7502901234",
+                email: "contact@savoglobal.com",
+                website: "https://savoglobal.com",
+                hours: "Open 24 hours",
+                services: "Enterprise Solutions"
+            },
+            {
+                name: "Black Grapes Softech",
+                rating: 4.3,
+                reviews: 52,
+                address: "252-F/H Scheme No 54, Vijaynagar, Indore",
+                phone: "+91 7470997884",
+                email: "info@blackgrapessoftech.com",
+                website: "https://blackgrapessoftech.com",
+                hours: "Closes 4:09 AM",
+                services: "Web & Mobile Development"
+            },
+            {
+                name: "TECHRENA TECHNOLOGIES",
+                rating: 4.7,
+                reviews: 75,
+                address: "OFFICE 408, 4TH FLOOR APOLLO PREMIER, Vijay Nagar Square, Indore",
+                phone: "+91 8982650208",
+                website: "https://www.techrenatech.com",
+                hours: "Opens 10 AM",
+                services: "IT Solutions"
+            },
+            {
+                name: "i-SOFTZONE - Software Development Company",
+                rating: 4.1,
+                reviews: 91,
+                address: "Shagun Arcade, Vijay Nagar Square, 215, AB Rd, near Medanta Hospital, Indore",
+                phone: "+91 7415664456",
+                website: "https://isoftzone.com",
+                hours: "Opens 10 AM",
+                services: "Software Development",
+                review: "Team is very professional and meet delivery before time"
+            },
+            {
+                name: "Samyotech Software Solutions Pvt. Ltd.",
+                rating: 4.6,
+                reviews: 66,
+                address: "1st Floor Pramukh Plaza, near Sajan Prabha Garden, Indore",
+                phone: "+91 7869999639",
+                website: "https://samyotech.com",
+                hours: "Opens 10 AM",
+                services: "Software Solutions"
+            },
+            {
+                name: "BridgeFix Technology Private Limited",
+                rating: 4.8,
+                reviews: 50,
+                address: "389-390, Indore",
+                phone: "+91 9425960946",
+                website: "https://bridgefix.com",
+                hours: "Opens 9:30 AM",
+                services: "Software Development",
+                review: "Supportive staff to learn new things and very healthy environment"
+            },
+            {
+                name -->
